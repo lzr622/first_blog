@@ -1,0 +1,45 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	background: #000;
+	opacity: 0.9;
+	position: fixed;
+	overflow: auto;
+}
+
+.cbp-spmenu input, .cbp-spmenu select, .cbp-spmenu textarea {
+	padding: 0.5rem;
+	width: 100%;
+}
+
+.cbp-spmenu form {
+	overflow: hidden;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+	width: 240px;
+	height: 100%;
+	top: 0;
+	z-index: 1000;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-left {
+	left: -240px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+	left: 0px;
+	padding: 0 10px;
+}
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
