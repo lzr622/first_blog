@@ -247,14 +247,14 @@ else:
 
 
 
-以上内容就是BeautifulSoup4相关的入门操作,如果想了解更多,请点击
+以上内容就是BeautifulSoup4的入门操作,如果想了解更多相关知识,请点击
 
-<a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" class="last_a">官方文档</a>
+<a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" class="last_a link_white">官方文档</a>
 
 
 <style>
 
-.last_a {
+.last_a.link_white {
     display: inline-block;
     padding: 5px 10px;
     background-color: #00a67c;
@@ -263,7 +263,7 @@ else:
     -webkit-transition-duration: .4s
 
 }
-.last_a:hover {
+.last_a.link_white:hover {
     background-color: #f60;
     color: white;
     text-decoration: none;
