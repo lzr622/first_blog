@@ -239,4 +239,30 @@ else:
     print("这是注释")
 # 这是注释
 ```
-上面的代码中，我们首先判断了它的类型，是否为 Comment 类型，然后再进行其他操作，如打印输出。
+上面的代码中，我们首先判断了它的类型，是否为 Comment 类型，然后再进行其他操作，如打印输出等。
+
+
+
+
+以上内容就是BeautifulSoup4相关的入门操作,如果想了解更多,请点击
+
+<a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" class="last_a">官方文档</a>
+
+
+<style>
+
+.last_a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #00a67c;
+    color: white;
+    border-radius: 2px;
+    -webkit-transition-duration: .4s
+
+}
+.last_a:hover {
+    background-color: #f60;
+    color: white;
+    text-decoration: none;
+}
+</style>
