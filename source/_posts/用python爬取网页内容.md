@@ -1,8 +1,8 @@
 ---
 title: 用python爬取网页内容
 date: 2018-08-06 08:30:44
-tags:
-descript: 用python实现爬取网页内容的小程序
+tags: python
+description: 用python实现爬取网页内容的小程序
 ---
 # 引入各种模块
 代码如下:
@@ -34,7 +34,8 @@ r.encoding = "utf-8"
 ## 处理接收到的内容  
 
 接收内容,并通过`BeautifulSoup`处理接收内容.  
-[更多关于`BeautifulSoup`的使用内容][1]
+
+[关于`BeautifulSoup`的使用内容][1]
 ```python
 html = r.text
 # 'html.parser'意思是html解析器,还有'lxml'--lxml解析器,'html5lib'--html5lib解析器等
@@ -53,7 +54,7 @@ soup = BeautifulSoup(html,'html.parser')
 代码如下:
 
 ```python
-soup.title.get_text()
+soup.title.get_text() # 我是标题
 ```
 ## 查找所有P标签
 
@@ -110,7 +111,7 @@ for p_one in p:
     p_content += p_one.get_text()
 ```
 
-## 将爬去的内容存储到文件中
+# 将爬取的内容存储到文件中
 
 假设所有内容都放到了一个名为`data`的字典里,`title`属性是页面标题,`content`属性是页面内容  
 代码如下:  
