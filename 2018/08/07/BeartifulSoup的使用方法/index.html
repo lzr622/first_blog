@@ -74,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2018-08-07T01:04:33.000Z" itemprop="datePublished">2018-08-07</time>
-    Updated:<time datetime="2018-08-07T09:19:25.844Z" itemprop="dateModified">2018-08-07</time>
+    Updated:<time datetime="2018-08-07T09:27:21.420Z" itemprop="dateModified">2018-08-07</time>
     
   </p>
 </header>
@@ -175,11 +175,11 @@
 <p>a 标签里的内容实际上是注释，但是如果我们利用 .string 来输出它的内容，我们发现它已经把注释符号去掉了，所以这可能会给我们带来不必要的麻烦。</p>
 <p>另外我们打印输出下它的类型，发现它是一个 Comment 类型，所以，我们在使用前最好做一下判断，判断代码如下(需要在文件开头加上<code>import bs4</code>,不然会显示<code>bs4.element.Comment中的 bs4 未定义</code>)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> type(soup.a.string)!=bs4.element.Comment:</span><br><span class="line">    <span class="keyword">print</span> (soup.a.string)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"这是注释"</span>)</span><br><span class="line"><span class="comment"># 这是注释</span></span><br></pre></td></tr></table></figure></p>
 <p>上面的代码中，我们首先判断了它的类型，是否为 Comment 类型，然后再进行其他操作，如打印输出等。</p>
-<p>以上内容就是BeautifulSoup4相关的入门操作,如果想了解更多,请点击</p>
-<p><a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" class="last_a" target="_blank" rel="noopener">官方文档</a></p>
+<p>以上内容就是BeautifulSoup4的入门操作,如果想了解更多相关知识,请点击</p>
+<p><a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" class="last_a link_white" target="_blank" rel="noopener">官方文档</a></p>
 <style>
 
-.last_a {
+.last_a.link_white {
     display: inline-block;
     padding: 5px 10px;
     background-color: #00a67c;
@@ -188,7 +188,7 @@
     -webkit-transition-duration: .4s
 
 }
-.last_a:hover {
+.last_a.link_white:hover {
     background-color: #f60;
     color: white;
     text-decoration: none;
