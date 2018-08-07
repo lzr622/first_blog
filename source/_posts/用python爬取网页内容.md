@@ -35,7 +35,7 @@ r.encoding = "utf-8"
 
 接收内容,并通过`BeautifulSoup`处理接收内容.  
 
-[关于`BeautifulSoup`的使用内容][1]
+[关于BeautifulSoup的使用内容][1]
 ```python
 html = r.text
 # 'html.parser'意思是html解析器,还有'lxml'--lxml解析器,'html5lib'--html5lib解析器等
