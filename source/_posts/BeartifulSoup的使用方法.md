@@ -40,6 +40,8 @@ pip install html5lib
 
 # 开始使用
 
+安装完毕后,我们现在就可以开始使用它了
+
 ## 创建一个beautifulsoup4对象
 
 我们先写一个html文件,以后就以它为对象进行操作
