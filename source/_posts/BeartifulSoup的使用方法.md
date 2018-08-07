@@ -19,16 +19,17 @@ description: BeautifulSoup的安装及使用
 ```python
 pip install beautifulsoup4
 ```
-
-之后可以选择安装 **lxml** 解析器
+如果直接使用的话,使用的是默认的html解析器,
+也可以选择安装 **lxml** 解析器
 ```python
 pip install lxml
 ```
 
-也可以安装纯python实现的html5lib解析器
+也可以安装纯python实现的 **html5lib** 解析器
 ```python
-pip install html5lib
+pip install html5lib  
 ```
+
 **如果被解析的HTML文档是标准格式,那么这几种解析器之间没有任何差别,只是解析速度不同,结果都会返回正确的文档树.**
 
 |解析器|使用方法|优势|劣势|
@@ -40,11 +41,11 @@ pip install html5lib
 
 # 开始使用
 
-安装完毕后,我们现在就可以开始使用它了
+安装完毕后,我们现在就可以开始试着去使用它了
 
-## 创建一个beautifulsoup4对象
+## 创建一个BeautifulSoup4对象
 
-我们先写一个html文件,以后就以它为对象进行操作
+我们在开始使用BeautifulSoup4之前,先写一段html代码,以后就以它为对象进行操作
 ```python
 html = """
 <html><head><title>The Dormouse's story</title></head>
@@ -117,7 +118,7 @@ Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节�
 ```html
 <title>story</title>
 ```
-其中`title`就是Tag
+其中Tag就是  `title`
 
 我们来具体操作一下
 下面每一段代码中注释部分即为运行结果
@@ -126,6 +127,8 @@ title = soup.title
 # <title>The Dormouse's story</title>
 # <class 'bs4.element.Tag'>
 ```
+
+
 操作P标签
 
 ```python
