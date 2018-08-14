@@ -1,7 +1,8 @@
 ---
 title: js的this详解
 date: 2018-08-01 13:38:31
-tags:
+tags: javascript
+description: js的this详解
 ---
 
 JS中this关键字很常见，但是它似乎变幻莫测，让人抓狂。这篇文章就来揭示其中的奥秘。
