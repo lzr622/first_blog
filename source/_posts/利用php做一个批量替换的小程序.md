@@ -41,16 +41,18 @@ description: 利用php做一个批量替换文件中内容的小程序
 效果如下:
 ![效果](利用php做一个批量替换的小程序/前端.png)
 
-这个前端主要的功能有:
+
+
+## js需实现的功能和代码
+
+js主要需要实现的功能有:
 
 + 可以填写文件名,并且通过ajax验证文件是否存在,文件类型是否合法(即通过后缀名判断),不存在或不合法都有所反馈
 + 可以添加需要修改的内容,初始设定为一处修改,可通过点击`add`添加为多处修改
 
-主要js的代码如下:
-
 ```html
     <script>
-        function addul() {
+        function addul() { //添加更多的修改之处
             var ul = document.getElementById("ul");
             var li = document.createElement("li");
             var li2 = document.createElement("li");
@@ -108,3 +110,23 @@ description: 利用php做一个批量替换文件中内容的小程序
         }
     </script>
 ```
+添加后的状态:
+![添加](利用php做一个批量替换的小程序/添加后.png)
+
+
+# 后台代码
+后台使用php实现
+
+因前端用ajax先传输数据进行无刷新的验证文件是否合法,所以要先对文件名进行判断
+## 判断文件是否合法
+
+通过`file_exist()`函数来判断文件名是否存在
+
+
+
+
+
+
+
+
+
