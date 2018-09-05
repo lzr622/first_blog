@@ -120,8 +120,230 @@ js主要需要实现的功能有:
 因前端用ajax先传输数据进行无刷新的验证文件是否合法,所以要先对文件名进行判断
 ## 判断文件是否合法
 
-通过`file_exist()`函数来判断文件名是否存在
+先通过`file_exist()`函数来判断文件名是否存在。
+```php
+$dir = $_POST['fn'];
 
+if(file_exists($dir)){//判断文件是否存在
+    
+}
+else{
+    echo "文件不存在";
+}
+```
+
+如果文件存在,再判断文件名是否合法。这里用一个自己写的函数来验证(参数`$filename`是一个由`,`连接起来的数组)
+
+```php
+function set($filename){
+  $filename = trim($filename,",");
+  $filename = explode(",",$filename);
+  $path = array();
+   for($s=0;$s<count($filename);$s++){
+       $postfix = trim(strrchr($filename[$s],'.'),'.');
+       $set = "txt,html,htm,doc,docx,php,js,css";
+
+       if(stristr($set,$postfix)){
+           $path[] = $filename[$s];   
+        
+       }
+    
+   }
+   if(empty($path)){
+    return 0;
+   } 
+   
+
+   return $path;
+}
+
+```
+以上就是验证文件名的方法
+
+## 遍历文件
+
+如果输入的是文件夹,则需要遍历出文件夹中的文件名,利用递归的方式来遍历文件名.
+```php
+function read_all ($dir){
+    $filename = "";
+    if(!is_dir($dir)) {//判断是否为文件夹
+        $filename = $dir.",";
+        
+    }
+    else{
+    $handle = opendir($dir);//打开目录并返回句柄资源
+    if($handle){
+        
+        while(($fl = readdir($handle)) !== false){//readdir会依次读取$handle资源里的每一条记录,直到读到错误或者end-of-file
+            $temp = iconv('GBK','utf-8',$dir.DIRECTORY_SEPARATOR.$fl);//转换成f-8格式
+
+            //如果不加  $fl!='.' && $fl != '..'  则会造成把$dir的父级目录也读取出来
+            if(is_dir($temp) && $fl!='.' && $fl != '..'){
+                
+                return read_all ($temp);
+                
+            }else{
+                if($fl!='.' && $fl != '..'){
+                   $filename .= $temp.",";
+                   
+                }
+            }
+        }
+    }
+   }
+   return $filename;
+}
+
+```
+## 完成替换
+
+最后完成内容的替换
+
+```php
+$before = $_POST["before"];
+$after = $_POST["after"];
+
+for($i=0;$i<count($path);$i++){
+        $fp = fopen($path[$i],"r");
+        $str = fread($fp,filesize($path[$i]));
+        echo "修改".$path[$i]."文件:<br>";
+        $w = implode("", $before);
+        if(!empty($w)){
+            for($s=0;$s<count($before);$s++){
+              if(!empty($before[$s])){ 
+                $str = str_replace($before[$s],$after[$s],$str);
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;".$before[$s]."---->".$after[$s]."<br><br>";
+            
+            }
+           
+            }
+            file_put_contents($path[$i],$str);
+        }
+
+fclose($fp);
+header("Refresh:10;url=index.html");//返回前端页面
+```
+以上就是这个小程序的所有逻辑和相关代码,后台完整代码详见附录
+
+# 附录
+
+```php
+<?php
+header("content-type:text/html; charset= utf-8");
+$dir = $_POST['fn'];
+$before = $_POST["before"];
+$after = $_POST["after"];
+
+if(file_exists($dir)){
+    $filename = read_all ($dir);
+   // var_dump($filename);
+    $path = set ($filename);
+    // echo $path[0];
+    if($path){
+    for($i=0;$i<count($path);$i++){
+        $fp = fopen($path[$i],"r");
+        $str = fread($fp,filesize($path[$i]));
+        echo "修改".$path[$i]."文件:<br>";
+        $w = implode("", $before);
+        if(!empty($w)){
+            for($s=0;$s<count($before);$s++){
+              if(!empty($before[$s])){ 
+                $str = str_replace($before[$s],$after[$s],$str);
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;".$before[$s]."---->".$after[$s]."<br><br>";
+            
+            }
+           
+            }
+            file_put_contents($path[$i],$str);
+        }
+        else{
+            echo "daole";
+                $str = str_replace("line-small","row-small",$str);
+                $str = str_replace("line-middle","row-middle",$str);
+                $str = str_replace("line-big","row-big",$str);
+            for($p=1;$p<13;$p++){
+                $str = str_replace(".x".$p,".col-xs-".$p,$str);
+                $str = str_replace(".xl".$p,".col-xs-".$p,$str);
+                $str = str_replace(".xs".$p,".col-sm-".$p,$str);
+                $str = str_replace(".xm".$p,".col-md-".$p,$str);
+                $str = str_replace(".xb".$p,".col-lg-".$p,$str);
+            }
+            file_put_contents($path[$i],$str);
+        }
+
+        fclose($fp);
+        header("Refresh:10;url=index.html");
+    }
+    }
+    else{
+        $set = "txt,html,htm,doc,docx,php,js,css";
+        echo "文件格式不符"."<br>"."文件格式应为".$set."中之一";
+        header("Refresh:4;url=index.html");
+        
+    }
+
+
+
+}
+else{
+    echo "文件不存在,请检查文件路径后再运行!";
+    header("Refresh:4;url=index.html");
+}
+function read_all ($dir){
+    $filename = "";
+    if(!is_dir($dir)) {
+        $filename = $dir.",";
+        
+    }
+    else{
+    $handle = opendir($dir);
+    if($handle){
+        
+        while(($fl = readdir($handle)) !== false){
+            $temp = iconv('GBK','utf-8',$dir.DIRECTORY_SEPARATOR.$fl);//转换成f-8格式
+            //如果不加  $fl!='.' && $fl != '..'  则会造成把$dir的父级目录也读取出来
+            
+            if(is_dir($temp) && $fl!='.' && $fl != '..'){
+                
+                return read_all ($temp);
+                
+            }else{
+                if($fl!='.' && $fl != '..'){
+                   $filename .= $temp.",";
+                   
+                }
+            }
+        }
+    }
+   }
+   return $filename;
+}
+function set($filename){
+  $filename = trim($filename,",");
+  $filename = explode(",",$filename);
+  $path = array();
+   for($s=0;$s<count($filename);$s++){
+       $postfix = trim(strrchr($filename[$s],'.'),'.');
+       $set = "txt,html,htm,doc,docx,php,js,css";
+
+       if(stristr($set,$postfix)){
+           $path[] = $filename[$s];   
+        
+       }
+    
+   }
+   if(empty($path)){
+    return 0;
+   } 
+   
+
+   return $path;
+}
+ 
+
+?>
+
+```
 
 
 
